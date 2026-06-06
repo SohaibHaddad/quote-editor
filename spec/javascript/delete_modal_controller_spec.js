@@ -105,4 +105,32 @@ describe("DeleteModalController", () => {
 
     application.stop()
   })
+
+  it("closes the modal when the delete form is submitted", async () => {
+    const application = mount(`
+      <div data-controller="delete-modal" data-delete-modal-default-message-value="This action cannot be undone.">
+        <button
+          id="trigger"
+          data-action="delete-modal#open"
+          data-delete-url="/quotes/1">
+        </button>
+        <div data-delete-modal-target="modal" class="hidden">
+          <p data-delete-modal-target="message"></p>
+          <form data-delete-modal-target="form" data-action="submit->delete-modal#submit"></form>
+        </div>
+      </div>
+    `)
+
+    await Promise.resolve()
+
+    const controllerElement = document.querySelector('[data-controller="delete-modal"]')
+    const controller = application.getControllerForElementAndIdentifier(controllerElement, "delete-modal")
+    controller.open({ currentTarget: document.getElementById("trigger") })
+    controller.submit()
+
+    expect(document.querySelector('[data-delete-modal-target="modal"]').classList.contains("hidden")).toBe(true)
+    expect(document.body.classList.contains("overflow-hidden")).toBe(false)
+
+    application.stop()
+  })
 })

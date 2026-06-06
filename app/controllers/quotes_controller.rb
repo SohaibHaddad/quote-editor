@@ -16,6 +16,10 @@ class QuotesController < ApplicationController
     end
   end
 
+  # This restores the inline "new quote" row in place with Turbo instead of
+  # navigating back to /quotes. A full page reload would reset the scroll
+  # position, which creates a poor user experience because the user loses
+  # their place in the table after cancelling the inline form.
   def cancel_new
     respond_to do |format|
       format.turbo_stream
@@ -62,6 +66,10 @@ class QuotesController < ApplicationController
     end
   end
 
+  # This restores the inline edit row in place with Turbo instead of
+  # navigating back to /quotes. A full page reload would reset the scroll
+  # position, which creates a poor user experience because the user loses
+  # their place in the table after cancelling the inline form.
   def cancel_edit
     respond_to do |format|
       format.turbo_stream

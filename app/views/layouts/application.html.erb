@@ -78,7 +78,7 @@
               <%= t("actions.cancel") %>
             </button>
 
-            <form data-delete-modal-target="form" action="#" method="post" class="inline-block">
+            <form data-delete-modal-target="form" data-action="submit->delete-modal#submit" action="#" method="post" class="inline-block">
               <input type="hidden" name="_method" value="delete">
               <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 

@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users, skip: [:registrations]
   resources :quotes, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+    # These custom cancel routes restore the inline Turbo rows in place.
+    # Without them, the cancel buttons would navigate back to /quotes,
+    # which reloads the page and resets the user's scroll position.
+    # That scroll jump creates a poor user experience because the user loses
+    # their place in the table after cancelling an inline action.
     get :cancel_new, on: :collection
-    patch :validate_quote, on: :member
     get :cancel_edit, on: :member
+    
+    patch :validate_quote, on: :member
     resources :quote_items, only: [:new, :create, :edit, :update, :destroy]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -21,6 +21,10 @@ export default class extends Controller {
     document.body.classList.remove("overflow-hidden")
   }
 
+  submit() {
+    this.close()
+  }
+
   closeBackground(event) {
     if (event.target === this.modalTarget) {
       this.close()
