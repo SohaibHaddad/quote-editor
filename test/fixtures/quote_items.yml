@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  quantity: 1
+  tax_rate: 9.99
+  price_before_tax: 9.99
+
+two:
+  name: MyString
+  quantity: 1
+  tax_rate: 9.99
+  price_before_tax: 9.99
