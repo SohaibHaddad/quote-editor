@@ -2,7 +2,18 @@
   <% show_actions = !quote.validated? %>
 
   <div class="overflow-x-auto">
-    <table class="min-w-full divide-y divide-stone-200">
+    <table class="min-w-full table-fixed divide-y divide-stone-200">
+      <colgroup>
+        <col>
+        <col class="w-24">
+        <col class="w-36">
+        <col class="w-24">
+        <col class="w-36">
+        <col class="w-36">
+        <% if show_actions %>
+          <col class="w-36">
+        <% end %>
+      </colgroup>
       <thead class="bg-stone-50">
         <tr>
           <th class="px-4 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500"><%= t("quote_items.table.columns.article") %></th>
