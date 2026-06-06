@@ -9,7 +9,7 @@ RSpec.describe Partner, type: :model do
     partner = build(:partner, name: nil)
 
     expect(partner).not_to be_valid
-    expect(partner.errors[:name]).to include("can't be blank")
+    expect(partner.errors[:name]).to include(I18n.t("errors.messages.blank"))
   end
 
   it "has many users" do

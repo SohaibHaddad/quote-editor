@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
     user = build(:user, username: nil)
 
     expect(user).not_to be_valid
-    expect(user.errors[:username]).to include("can't be blank")
+    expect(user.errors[:username]).to include(I18n.t("errors.messages.blank"))
   end
 
   it "enforces case-insensitive username uniqueness" do
@@ -17,7 +17,7 @@ RSpec.describe User, type: :model do
     duplicate = build(:user, username: "demo")
 
     expect(duplicate).not_to be_valid
-    expect(duplicate.errors[:username]).to include("has already been taken")
+    expect(duplicate.errors[:username]).to include(I18n.t("errors.messages.taken"))
   end
 
   it "belongs to a partner" do

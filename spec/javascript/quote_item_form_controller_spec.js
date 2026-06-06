@@ -18,7 +18,7 @@ describe("QuoteItemFormController", () => {
 
   it("shows placeholder labels when values are incomplete", async () => {
     const application = mount(`
-      <div data-controller="quote-item-form">
+      <div data-controller="quote-item-form" data-quote-item-form-total-ht-placeholder-value="Total HT" data-quote-item-form-total-ttc-placeholder-value="Total TTC">
         <input data-quote-item-form-target="quantity" value="">
         <input data-quote-item-form-target="unitPrice" value="12.34">
         <select data-quote-item-form-target="taxRate"><option value="20" selected>20%</option></select>
@@ -37,7 +37,7 @@ describe("QuoteItemFormController", () => {
 
   it("computes live totals in euro", async () => {
     const application = mount(`
-      <div data-controller="quote-item-form">
+      <div data-controller="quote-item-form" data-quote-item-form-total-ht-placeholder-value="Total HT" data-quote-item-form-total-ttc-placeholder-value="Total TTC">
         <input data-quote-item-form-target="quantity" value="2">
         <input data-quote-item-form-target="unitPrice" value="12.50">
         <select data-quote-item-form-target="taxRate"><option value="20" selected>20%</option></select>
@@ -56,7 +56,7 @@ describe("QuoteItemFormController", () => {
 
   it("accepts comma decimals when updating", async () => {
     const application = mount(`
-      <div data-controller="quote-item-form">
+      <div data-controller="quote-item-form" data-quote-item-form-total-ht-placeholder-value="Total HT" data-quote-item-form-total-ttc-placeholder-value="Total TTC">
         <input data-quote-item-form-target="quantity" value="3">
         <input data-quote-item-form-target="unitPrice" value="10,10">
         <select data-quote-item-form-target="taxRate"><option value="10" selected>10%</option></select>

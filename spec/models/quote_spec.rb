@@ -29,7 +29,7 @@ RSpec.describe Quote, type: :model do
     quote = build(:quote, name: nil)
 
     expect(quote).not_to be_valid
-    expect(quote.errors[:name]).to include("can't be blank")
+    expect(quote.errors[:name]).to include(I18n.t("errors.messages.blank"))
   end
 
   it "starts in draft" do

@@ -1,0 +1,12 @@
+fr:
+  devise:
+    failure:
+      already_authenticated: "Vous êtes déjà connecté."
+      invalid: "%{authentication_keys} ou mot de passe invalide."
+      not_found_in_database: "%{authentication_keys} ou mot de passe invalide."
+      timeout: "Votre session a expiré. Veuillez vous reconnecter."
+      unauthenticated: "Vous devez vous connecter pour continuer."
+    sessions:
+      signed_in: "Connexion réussie."
+      signed_out: "Déconnexion réussie."
+      already_signed_out: "Déconnexion réussie."

@@ -20,4 +20,10 @@ RSpec.describe "Authentication", type: :request do
 
     expect(response).to redirect_to(root_path)
   end
+
+  it "switches locale from the locale param" do
+    get new_user_session_path, params: { locale: :en }
+
+    expect(response.body).to include("Sign in")
+  end
 end

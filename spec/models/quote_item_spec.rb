@@ -15,28 +15,28 @@ RSpec.describe QuoteItem, type: :model do
     quote_item = build(:quote_item, name: nil)
 
     expect(quote_item).not_to be_valid
-    expect(quote_item.errors[:name]).to include("can't be blank")
+    expect(quote_item.errors[:name]).to include(I18n.t("errors.messages.blank"))
   end
 
   it "requires non-negative quantity" do
     quote_item = build(:quote_item, quantity: -1)
 
     expect(quote_item).not_to be_valid
-    expect(quote_item.errors[:quantity]).to include("must be greater than or equal to 0")
+    expect(quote_item.errors[:quantity]).to include(I18n.t("errors.messages.greater_than_or_equal_to", count: 0))
   end
 
   it "requires unit price in cents to be non-negative" do
     quote_item = build(:quote_item, unit_price_before_tax_in_cents: -1)
 
     expect(quote_item).not_to be_valid
-    expect(quote_item.errors[:unit_price_before_tax_in_cents]).to include("must be greater than or equal to 0")
+    expect(quote_item.errors[:unit_price_before_tax_in_cents]).to include(I18n.t("errors.messages.greater_than_or_equal_to", count: 0))
   end
 
   it "requires tax rate to be between 0 and 100" do
     quote_item = build(:quote_item, tax_rate: 100.1)
 
     expect(quote_item).not_to be_valid
-    expect(quote_item.errors[:tax_rate]).to include("must be less than or equal to 100")
+    expect(quote_item.errors[:tax_rate]).to include(I18n.t("errors.messages.less_than_or_equal_to", count: 100))
   end
 
   it "converts euro input to integer cents" do

@@ -1,27 +1,27 @@
 <tr id="<%= dom_id(quote) %>" class="align-middle">
   <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-stone-900"><%= quote.id %></td>
-  <td class="whitespace-nowrap px-6 py-4 text-sm text-stone-600"><%= quote.created_at.strftime("%Y-%m-%d") %></td>
+  <td class="whitespace-nowrap px-6 py-4 text-sm text-stone-600"><%= l(quote.created_at.to_date, format: :default) %></td>
   <td class="px-6 py-4 text-sm text-stone-900">
     <div class="font-medium"><%= quote.name %></div>
-    <div class="mt-1 text-xs text-stone-500">Created by <%= quote.created_by.username %></div>
+    <div class="mt-1 text-xs text-stone-500"><%= t("quotes.shared.created_by", username: quote.created_by.username) %></div>
   </td>
   <td class="whitespace-nowrap px-6 py-4 text-sm text-stone-900">
     <% if quote.validated? %>
-      <span class="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">Validated</span>
+      <span class="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700"><%= t("quotes.states.validated") %></span>
     <% else %>
-      <span class="inline-flex rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-700">In draft</span>
+      <span class="inline-flex rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-700"><%= t("quotes.states.in_draft") %></span>
     <% end %>
   </td>
   <td class="px-6 py-4">
     <div class="flex flex-wrap gap-2">
-      <%= link_to quote_path(quote), title: "See", aria: { label: "See quote" }, class: "inline-flex h-10 w-10 items-center justify-center rounded-full border border-stone-300 text-stone-700 transition hover:border-stone-400 hover:bg-stone-50" do %>
+      <%= link_to quote_path(quote), title: t("actions.see"), aria: { label: t("quotes.index.actions.see_quote") }, class: "inline-flex h-10 w-10 items-center justify-center rounded-full border border-stone-300 text-stone-700 transition hover:border-stone-400 hover:bg-stone-50" do %>
         <%= image_tag "icons/quote-see.svg", alt: "", class: "h-4 w-4" %>
       <% end %>
       <% unless quote.validated? %>
-        <%= link_to edit_quote_path(quote), data: { turbo_stream: true }, title: "Edit", aria: { label: "Edit quote" }, class: "inline-flex h-10 w-10 items-center justify-center rounded-full border border-emerald-300 text-emerald-800 transition hover:border-emerald-400 hover:bg-emerald-50" do %>
+        <%= link_to edit_quote_path(quote), data: { turbo_stream: true }, title: t("actions.edit"), aria: { label: t("quotes.index.actions.edit_quote") }, class: "inline-flex h-10 w-10 items-center justify-center rounded-full border border-emerald-300 text-emerald-800 transition hover:border-emerald-400 hover:bg-emerald-50" do %>
           <%= image_tag "icons/quote-edit.svg", alt: "", class: "h-4 w-4" %>
         <% end %>
-        <button type="button" data-action="delete-modal#open" data-delete-url="<%= quote_path(quote) %>" data-delete-message="This quote and all its items will be permanently deleted." title="Delete" aria-label="Delete quote" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-rose-300 bg-white text-rose-700 transition hover:bg-rose-50">
+        <button type="button" data-action="delete-modal#open" data-delete-url="<%= quote_path(quote) %>" data-delete-message="<%= t("quotes.index.actions.delete_quote_message") %>" title="<%= t("actions.delete") %>" aria-label="<%= t("quotes.index.actions.delete_quote") %>" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-rose-300 bg-white text-rose-700 transition hover:bg-rose-50">
           <%= image_tag "icons/quote-delete.svg", alt: "", class: "h-4 w-4" %>
         </button>
       <% end %>

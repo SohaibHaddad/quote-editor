@@ -1,15 +1,15 @@
 <section id="quotes_header" class="flex flex-col gap-4 rounded-3xl border border-stone-200 bg-white p-8 shadow-lg">
-  <p class="text-sm font-semibold uppercase tracking-widest text-emerald-700">Quotes</p>
+  <p class="text-sm font-semibold uppercase tracking-widest text-emerald-700"><%= t("quotes.index.section_label") %></p>
   <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
     <div>
-      <h1 class="text-4xl font-semibold tracking-tight text-stone-950">All partner quotes</h1>
+      <h1 class="text-4xl font-semibold tracking-tight text-stone-950"><%= t("quotes.index.title") %></h1>
       <p class="mt-3 max-w-3xl text-sm leading-7 text-stone-600">
-        Quotes created by you and by the other users attached to <%= current_user.partner.name %>.
+        <%= t("quotes.index.description", partner_name: current_user.partner.name) %>
       </p>
     </div>
 
     <div id="quotes_count" class="rounded-2xl bg-stone-100 px-4 py-3 text-center">
-      <p class="text-xs font-semibold uppercase tracking-wide text-stone-500">Total Quotes</p>
+      <p class="text-xs font-semibold uppercase tracking-wide text-stone-500"><%= t("quotes.index.total_quotes") %></p>
       <p class="mt-2 text-2xl font-semibold text-stone-950"><%= quotes.size %></p>
     </div>
   </div>

@@ -1,22 +1,22 @@
 <% form_id = dom_id(quote_item, :form) %>
 
-<tr id="<%= dom_id(quote_item) %>" class="bg-amber-50 align-top" data-controller="quote-item-form">
+<tr id="<%= dom_id(quote_item) %>" class="bg-amber-50 align-top" data-controller="quote-item-form" data-quote-item-form-total-ht-placeholder-value="<%= t("quote_items.form.total_ht_placeholder") %>" data-quote-item-form-total-ttc-placeholder-value="<%= t("quote_items.form.total_ttc_placeholder") %>">
   <td class="px-4 py-4 text-sm font-medium text-stone-900">
     <%= form_with model: [quote, quote_item], id: form_id, class: "hidden" do |f| %><% end %>
 
-    <%= text_field_tag "quote_item[name]", quote_item.name, form: form_id, placeholder: "Article name", class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
+    <%= text_field_tag "quote_item[name]", quote_item.name, form: form_id, placeholder: t("quote_items.form.name_placeholder"), class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
     <% if quote_item.errors[:name].any? %>
       <p class="mt-2 text-xs text-rose-700"><%= quote_item.errors[:name].to_sentence %></p>
     <% end %>
   </td>
   <td class="px-3 py-4 text-sm text-stone-600 align-top">
-    <%= number_field_tag "quote_item[quantity]", quote_item.quantity, min: 0, step: 1, form: form_id, placeholder: "Qty", data: { quote_item_form_target: "quantity", action: "input->quote-item-form#update" }, class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
+    <%= number_field_tag "quote_item[quantity]", quote_item.quantity, min: 0, step: 1, form: form_id, placeholder: t("quote_items.form.quantity_placeholder"), data: { quote_item_form_target: "quantity", action: "input->quote-item-form#update" }, class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
     <% if quote_item.errors[:quantity].any? %>
       <p class="mt-2 text-xs text-rose-700"><%= quote_item.errors[:quantity].to_sentence %></p>
     <% end %>
   </td>
   <td class="px-3 py-4 text-sm text-stone-600 align-top">
-    <%= number_field_tag "quote_item[unit_price_before_tax_euros]", quote_item.unit_price_before_tax_euros, min: 0, step: 0.01, form: form_id, placeholder: "Amount", data: { quote_item_form_target: "unitPrice", action: "input->quote-item-form#update" }, class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
+    <%= number_field_tag "quote_item[unit_price_before_tax_euros]", quote_item.unit_price_before_tax_euros, min: 0, step: 0.01, form: form_id, placeholder: t("quote_items.form.amount_placeholder"), data: { quote_item_form_target: "unitPrice", action: "input->quote-item-form#update" }, class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
     <% if quote_item.errors[:unit_price_before_tax_in_cents].any? %>
       <p class="mt-2 text-xs text-rose-700"><%= quote_item.errors[:unit_price_before_tax_in_cents].to_sentence %></p>
     <% end %>
@@ -29,20 +29,20 @@
   </td>
   <td class="px-3 py-4 text-sm text-stone-900 align-top">
     <div data-quote-item-form-target="totalHt" class="flex min-h-12 items-center rounded-xl border border-dashed border-stone-200 bg-stone-50 px-3 text-sm font-medium text-stone-400">
-      Total HT
+      <%= t("quote_items.form.total_ht_placeholder") %>
     </div>
   </td>
   <td class="px-3 py-4 text-sm font-medium text-stone-900 align-top">
     <div data-quote-item-form-target="totalTtc" class="flex min-h-12 items-center rounded-xl border border-dashed border-stone-200 bg-stone-50 px-3 text-sm font-medium text-stone-400">
-      Total TTC
+      <%= t("quote_items.form.total_ttc_placeholder") %>
     </div>
   </td>
   <td class="px-4 py-4 align-top">
     <div class="flex flex-wrap gap-2">
-      <%= button_tag type: "submit", form: form_id, title: "Save item", aria: { label: "Save item" }, class: "inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-400 text-stone-950 transition hover:bg-amber-300" do %>
+      <%= button_tag type: "submit", form: form_id, title: t("quote_items.actions.save_item"), aria: { label: t("quote_items.actions.save_item") }, class: "inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-400 text-stone-950 transition hover:bg-amber-300" do %>
         <%= image_tag "icons/quote-add.svg", alt: "", class: "h-5 w-5" %>
       <% end %>
-      <%= link_to quote_path(quote), title: "Cancel", aria: { label: "Cancel edit item" }, class: "inline-flex h-12 w-12 items-center justify-center rounded-xl border border-stone-300 text-stone-700 transition hover:bg-stone-50" do %>
+      <%= link_to quote_path(quote), title: t("actions.cancel"), aria: { label: t("quote_items.actions.cancel_edit_item") }, class: "inline-flex h-12 w-12 items-center justify-center rounded-xl border border-stone-300 text-stone-700 transition hover:bg-stone-50" do %>
         <%= image_tag "icons/quote-cancel.svg", alt: "", class: "h-5 w-5" %>
       <% end %>
     </div>

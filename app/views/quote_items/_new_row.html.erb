@@ -1,7 +1,7 @@
 <% unless quote.validated? %>
   <tr id="new_quote_item_row">
     <td colspan="7" class="px-4 py-6">
-      <%= link_to new_quote_quote_item_path(quote), data: { turbo_stream: true }, title: "Add item", aria: { label: "Add item" }, class: "inline-flex min-h-14 w-full items-center justify-center rounded-2xl border border-dashed border-stone-300 bg-white px-5 py-3 text-stone-900 transition hover:bg-stone-50" do %>
+      <%= link_to new_quote_quote_item_path(quote), data: { turbo_stream: true }, title: t("quote_items.actions.add_item"), aria: { label: t("quote_items.actions.add_item") }, class: "inline-flex min-h-14 w-full items-center justify-center rounded-2xl border border-dashed border-stone-300 bg-white px-5 py-3 text-stone-900 transition hover:bg-stone-50" do %>
         <%= image_tag "icons/quote-add.svg", alt: "", class: "h-5 w-5" %>
       <% end %>
     </td>

@@ -1,0 +1,88 @@
+fr:
+  app:
+    name: "Editeur de devis"
+  actions:
+    cancel: "Annuler"
+    delete: "Supprimer"
+    edit: "Modifier"
+    save_changes: "Enregistrer"
+    see: "Voir"
+  layout:
+    language: "Langue"
+    sign_out: "Se déconnecter"
+    signed_in_as_html: "Connecté en tant que %{username}"
+  locales:
+    en: "Anglais"
+    fr: "Français"
+  delete_modal:
+    default_message: "Cette action est irréversible."
+  quotes:
+    states:
+      in_draft: "Brouillon"
+      validated: "Validé"
+    shared:
+      created_by: "Créé par %{username}"
+    form:
+      create_quote: "Créer un devis"
+      name_placeholder: "Nom du devis"
+    index:
+      section_label: "Devis"
+      title: "Tous les devis du partenaire"
+      description: "Devis créés par vous et par les autres utilisateurs rattachés à %{partner_name}."
+      total_quotes: "Nombre total de devis"
+      empty_state: "Aucun devis n'est encore disponible pour votre partenaire."
+      columns:
+        id: "ID"
+        creation_date: "Date de création"
+        name: "Nom"
+        state: "Statut"
+        actions: "Actions"
+      actions:
+        add_quote: "Ajouter un devis"
+        see_quote: "Voir le devis"
+        edit_quote: "Modifier le devis"
+        delete_quote: "Supprimer le devis"
+        delete_quote_message: "Ce devis et tous ses éléments seront supprimés définitivement."
+    show:
+      back: "Enregistrer et quitter"
+      quote_number: "Devis n°%{id}"
+      created_on: "Créé le %{date} par %{username}."
+  quote_items:
+    table:
+      empty_state: "Aucun élément n'a encore été ajouté à ce devis."
+      columns:
+        article: "Article"
+        quantity: "Qté"
+        unit_price_before_tax: "PU HT"
+        tax_rate: "TVA"
+        total_ht: "Total HT"
+        total_ttc: "Total TTC"
+        actions: "Actions"
+    totals:
+      total_ht: "Total HT"
+      total_tax: "Total TVA"
+      total_ttc: "Total TTC"
+      validate_quote: "Valider le devis"
+    form:
+      name_placeholder: "Nom de l'article"
+      quantity_placeholder: "Qté"
+      amount_placeholder: "Montant"
+      total_ht_placeholder: "Total HT"
+      total_ttc_placeholder: "Total TTC"
+    actions:
+      add_item: "Ajouter un article"
+      edit_item: "Modifier l'article"
+      delete_item: "Supprimer l'article"
+      delete_item_message: "Cet article sera supprimé définitivement du devis."
+      save_item: "Enregistrer l'article"
+      cancel_new_item: "Annuler l'ajout d'article"
+      cancel_edit_item: "Annuler la modification de l'article"
+  date:
+    formats:
+      default: "%d/%m/%Y"
+  errors:
+    messages:
+      blank: "ne peut pas être vide"
+      taken: "est déjà utilisé"
+      greater_than_or_equal_to: "doit être supérieur ou égal à %{count}"
+      less_than_or_equal_to: "doit être inférieur ou égal à %{count}"

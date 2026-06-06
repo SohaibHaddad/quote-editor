@@ -5,14 +5,14 @@
     <table class="min-w-full divide-y divide-stone-200">
       <thead class="bg-stone-50">
         <tr>
-          <th class="px-4 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">Article</th>
-          <th class="px-3 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">Qty</th>
-          <th class="px-3 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">PU HT</th>
-          <th class="px-3 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">TVA</th>
-          <th class="px-3 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">Total HT</th>
-          <th class="px-3 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">Total TTC</th>
+          <th class="px-4 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500"><%= t("quote_items.table.columns.article") %></th>
+          <th class="px-3 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500"><%= t("quote_items.table.columns.quantity") %></th>
+          <th class="px-3 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500"><%= t("quote_items.table.columns.unit_price_before_tax") %></th>
+          <th class="px-3 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500"><%= t("quote_items.table.columns.tax_rate") %></th>
+          <th class="px-3 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500"><%= t("quote_items.table.columns.total_ht") %></th>
+          <th class="px-3 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500"><%= t("quote_items.table.columns.total_ttc") %></th>
           <% if show_actions %>
-            <th class="px-4 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">Actions</th>
+            <th class="px-4 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500"><%= t("quote_items.table.columns.actions") %></th>
           <% end %>
         </tr>
       </thead>
@@ -23,7 +23,7 @@
           <% end %>
         <% else %>
           <tr id="empty_quote_items_row">
-            <td colspan="<%= show_actions ? 7 : 6 %>" class="px-4 py-10 text-sm text-stone-600">No items on this quote yet.</td>
+            <td colspan="<%= show_actions ? 7 : 6 %>" class="px-4 py-10 text-sm text-stone-600"><%= t("quote_items.table.empty_state") %></td>
           </tr>
         <% end %>
         <%= render "quote_items/new_row", quote: quote %>

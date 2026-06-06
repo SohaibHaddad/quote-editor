@@ -19,7 +19,7 @@ describe("DeleteModalController", () => {
 
   it("opens the modal and injects the delete metadata", async () => {
     const application = mount(`
-      <div data-controller="delete-modal">
+      <div data-controller="delete-modal" data-delete-modal-default-message-value="This action cannot be undone.">
         <button
           id="trigger"
           data-action="delete-modal#open"
@@ -48,7 +48,7 @@ describe("DeleteModalController", () => {
 
   it("closes the modal", async () => {
     const application = mount(`
-      <div data-controller="delete-modal">
+      <div data-controller="delete-modal" data-delete-modal-default-message-value="This action cannot be undone.">
         <button
           id="trigger"
           data-action="delete-modal#open"
@@ -76,7 +76,7 @@ describe("DeleteModalController", () => {
 
   it("closes only when the backdrop is clicked", async () => {
     const application = mount(`
-      <div data-controller="delete-modal">
+      <div data-controller="delete-modal" data-delete-modal-default-message-value="This action cannot be undone.">
         <button
           id="trigger"
           data-action="delete-modal#open"

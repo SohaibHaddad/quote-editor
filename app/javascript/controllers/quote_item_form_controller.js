@@ -7,6 +7,10 @@ const euroFormatter = new Intl.NumberFormat("fr-FR", {
 
 export default class extends Controller {
   static targets = ["quantity", "unitPrice", "taxRate", "totalHt", "totalTtc"]
+  static values = {
+    totalHtPlaceholder: String,
+    totalTtcPlaceholder: String
+  }
 
   connect() {
     this.update()
@@ -18,8 +22,8 @@ export default class extends Controller {
     const taxRate = this.numberValue(this.taxRateTarget.value)
 
     if (quantity === null || unitPrice === null || taxRate === null) {
-      this.totalHtTarget.textContent = "Total HT"
-      this.totalTtcTarget.textContent = "Total TTC"
+      this.totalHtTarget.textContent = this.totalHtPlaceholderValue
+      this.totalTtcTarget.textContent = this.totalTtcPlaceholderValue
       return
     }
 
