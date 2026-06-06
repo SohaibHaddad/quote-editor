@@ -35,7 +35,7 @@ describe("QuoteItemFormController", () => {
     application.stop()
   })
 
-  it("computes live totals in euro", async () => {
+  it("computes live totals from decimal amount input", async () => {
     const application = mount(`
       <div data-controller="quote-item-form" data-quote-item-form-total-ht-placeholder-value="Total HT" data-quote-item-form-total-ttc-placeholder-value="Total TTC">
         <input data-quote-item-form-target="quantity" value="2">

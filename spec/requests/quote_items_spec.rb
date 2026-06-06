@@ -31,13 +31,13 @@ RSpec.describe "QuoteItems", type: :request do
         quote_item: {
           name: "Lunch",
           quantity: 2,
-          unit_price_before_tax_euros: "12.34",
+          unit_price_before_tax_amount: "12.34",
           tax_rate: 20
         }
       }
     end
 
-    it "creates a quote item and converts euros to cents" do
+    it "creates a quote item and converts decimal amount input to cents" do
       expect do
         post quote_quote_items_path(quote_record, format: :turbo_stream),
              params: params,
@@ -52,7 +52,7 @@ RSpec.describe "QuoteItems", type: :request do
     it "returns unprocessable entity for invalid params" do
       expect do
         post quote_quote_items_path(quote_record, format: :turbo_stream),
-             params: { quote_item: { name: "", quantity: nil, unit_price_before_tax_euros: "", tax_rate: 20 } },
+             params: { quote_item: { name: "", quantity: nil, unit_price_before_tax_amount: "", tax_rate: 20 } },
              headers: turbo_stream_headers
       end.not_to change(QuoteItem, :count)
 
@@ -100,7 +100,7 @@ RSpec.describe "QuoteItems", type: :request do
               quote_item: {
                 name: "Updated item",
                 quantity: 3,
-                unit_price_before_tax_euros: "15.50",
+                unit_price_before_tax_amount: "15.50",
                 tax_rate: 10
               }
             },
@@ -121,7 +121,7 @@ RSpec.describe "QuoteItems", type: :request do
               quote_item: {
                 name: "",
                 quantity: -1,
-                unit_price_before_tax_euros: "",
+                unit_price_before_tax_amount: "",
                 tax_rate: 200
               }
             },
@@ -135,7 +135,7 @@ RSpec.describe "QuoteItems", type: :request do
       quote_record.update_column(:state, 1)
 
       patch quote_quote_item_path(quote_record, quote_item, format: :turbo_stream),
-            params: { quote_item: { name: "Blocked", quantity: 1, unit_price_before_tax_euros: "10.00", tax_rate: 20 } },
+            params: { quote_item: { name: "Blocked", quantity: 1, unit_price_before_tax_amount: "10.00", tax_rate: 20 } },
             headers: turbo_stream_headers
 
       expect(response).to have_http_status(:forbidden)

@@ -13,7 +13,7 @@
           <%= f.button type: "submit", title: t("actions.save_changes"), aria: { label: t("actions.save_changes") }, class: "inline-flex h-12 w-12 items-center justify-center rounded-full bg-amber-400 text-stone-950 transition hover:bg-amber-300" do %>
             <%= image_tag "icons/quote-edit.svg", alt: "", class: "h-5 w-5" %>
           <% end %>
-          <%= link_to quotes_path, data: { turbo_frame: "_top" }, title: t("actions.cancel"), aria: { label: t("actions.cancel") }, class: "inline-flex h-12 w-12 items-center justify-center rounded-full border border-stone-300 text-stone-700 transition hover:bg-stone-50" do %>
+          <%= link_to cancel_edit_quote_path(quote), data: { turbo_stream: true }, title: t("actions.cancel"), aria: { label: t("actions.cancel") }, class: "inline-flex h-12 w-12 items-center justify-center rounded-full border border-stone-300 text-stone-700 transition hover:bg-stone-50" do %>
             <%= image_tag "icons/quote-cancel.svg", alt: "", class: "h-5 w-5" %>
           <% end %>
         </div>

@@ -1,7 +1,7 @@
 class QuotesController < ApplicationController
-  before_action :set_quote, only: [:show, :edit, :update, :destroy, :validate_quote]
+  before_action :set_quote, only: [:show, :edit, :update, :destroy, :validate_quote, :cancel_edit]
   before_action :load_quotes, only: [:index, :destroy]
-  before_action :ensure_quote_is_editable, only: [:edit, :update, :destroy]
+  before_action :ensure_quote_is_editable, only: [:edit, :update, :destroy, :cancel_edit]
 
   def index
     @quote = Quote.new
@@ -11,6 +11,12 @@ class QuotesController < ApplicationController
     @quote = current_user.partner.quotes.new
     @quote.created_by = current_user
 
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
+  def cancel_new
     respond_to do |format|
       format.turbo_stream
     end
@@ -53,6 +59,12 @@ class QuotesController < ApplicationController
       respond_to do |format|
         format.turbo_stream { render :update, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def cancel_edit
+    respond_to do |format|
+      format.turbo_stream
     end
   end
 

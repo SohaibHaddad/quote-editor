@@ -67,6 +67,16 @@ RSpec.describe "Quotes", type: :request do
     end
   end
 
+  describe "GET /quotes/cancel_new" do
+    it "renders the new quote row again" do
+      get cancel_new_quotes_path(format: :turbo_stream), headers: turbo_stream_headers
+
+      expect(response).to have_http_status(:ok)
+      expect(response.media_type).to eq Mime[:turbo_stream].to_s
+      expect(response.body).to include('target="new_quote_row"')
+    end
+  end
+
   describe "GET /quotes/:id/edit" do
     it "renders the edit turbo stream for a draft quote" do
       quote = create(:quote, partner: partner, created_by: user)
@@ -117,6 +127,26 @@ RSpec.describe "Quotes", type: :request do
 
       expect(response).to have_http_status(:forbidden)
       expect(quote.reload.name).not_to eq("After")
+    end
+  end
+
+  describe "GET /quotes/:id/cancel_edit" do
+    it "renders the quote row again for a draft quote" do
+      quote = create(:quote, partner: partner, created_by: user)
+
+      get cancel_edit_quote_path(quote, format: :turbo_stream), headers: turbo_stream_headers
+
+      expect(response).to have_http_status(:ok)
+      expect(response.media_type).to eq Mime[:turbo_stream].to_s
+      expect(response.body).to include(%(target="#{ActionView::RecordIdentifier.dom_id(quote)}"))
+    end
+
+    it "returns forbidden for a validated quote" do
+      quote = create(:quote, :validated, partner: partner, created_by: user)
+
+      get cancel_edit_quote_path(quote, format: :turbo_stream), headers: turbo_stream_headers
+
+      expect(response).to have_http_status(:forbidden)
     end
   end
 

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users, skip: [:registrations]
   resources :quotes, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+    get :cancel_new, on: :collection
     patch :validate_quote, on: :member
+    get :cancel_edit, on: :member
     resources :quote_items, only: [:new, :create, :edit, :update, :destroy]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

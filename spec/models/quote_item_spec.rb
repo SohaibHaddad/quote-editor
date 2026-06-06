@@ -39,34 +39,34 @@ RSpec.describe QuoteItem, type: :model do
     expect(quote_item.errors[:tax_rate]).to include(I18n.t("errors.messages.less_than_or_equal_to", count: 100))
   end
 
-  it "converts euro input to integer cents" do
+  it "converts decimal amount input to integer cents" do
     quote_item = build(:quote_item, unit_price_before_tax_in_cents: nil)
-    quote_item.unit_price_before_tax_euros = "12.34"
+    quote_item.unit_price_before_tax_amount = "12.34"
 
     expect(quote_item.unit_price_before_tax_in_cents).to eq(1234)
   end
 
-  it "accepts comma decimal input for euro conversion" do
+  it "accepts comma decimal input for amount conversion" do
     quote_item = build(:quote_item, unit_price_before_tax_in_cents: nil)
-    quote_item.unit_price_before_tax_euros = "12,34"
+    quote_item.unit_price_before_tax_amount = "12,34"
 
     expect(quote_item.unit_price_before_tax_in_cents).to eq(1234)
   end
 
-  it "returns euro input from stored cents" do
+  it "returns decimal amount input from stored cents" do
     quote_item = build(:quote_item, unit_price_before_tax_in_cents: 1234)
 
-    expect(quote_item.unit_price_before_tax_euros).to eq("12.34")
+    expect(quote_item.unit_price_before_tax_amount).to eq("12.34")
   end
 
-  it "returns nil cents for invalid euro input" do
+  it "returns nil cents for invalid amount input" do
     quote_item = build(:quote_item, unit_price_before_tax_in_cents: 100)
-    quote_item.unit_price_before_tax_euros = "abc"
+    quote_item.unit_price_before_tax_amount = "abc"
 
     expect(quote_item.unit_price_before_tax_in_cents).to be_nil
   end
 
-  it "computes unit price before tax in euros" do
+  it "computes unit price before tax as a decimal amount" do
     quote_item = build(:quote_item, unit_price_before_tax_in_cents: 1234)
 
     expect(quote_item.unit_price_before_tax).to eq(12.34.to_d)
