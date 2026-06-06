@@ -63,7 +63,7 @@ class QuoteItemsController < ApplicationController
   end
 
   def quote_item_params
-    params.require(:quote_item).permit(:name, :quantity, :tax_rate, :unit_price_before_tax_in_cents)
+    params.require(:quote_item).permit(:name, :quantity, :tax_rate, :unit_price_before_tax_euros)
   end
 
   def ensure_quote_is_editable
