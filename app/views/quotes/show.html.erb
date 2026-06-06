@@ -6,7 +6,11 @@
         <span>Save and quit</span>
       <% end %>
 
-      <span class="rounded-full bg-violet-100 px-4 py-2 text-sm font-semibold text-violet-700">In progress</span>
+      <% if @quote.validated? %>
+        <span class="rounded-full bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-700">Validated</span>
+      <% else %>
+        <span class="rounded-full bg-violet-100 px-4 py-2 text-sm font-semibold text-violet-700">In draft</span>
+      <% end %>
     </div>
 
     <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">

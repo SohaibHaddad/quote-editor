@@ -1,6 +1,7 @@
 class QuotesController < ApplicationController
   before_action :set_quote, only: [:show, :edit, :update, :destroy, :validate_quote]
   before_action :load_quotes, only: [:index, :destroy]
+  before_action :ensure_quote_is_editable, only: [:edit, :update, :destroy]
 
   def index
     @quote = Quote.new
@@ -85,5 +86,9 @@ class QuotesController < ApplicationController
 
   def quote_params
     params.require(:quote).permit(:name)
+  end
+
+  def ensure_quote_is_editable
+    head :forbidden if @quote.validated?
   end
 end
