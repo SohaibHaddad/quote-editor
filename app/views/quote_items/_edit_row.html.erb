@@ -1,6 +1,6 @@
 <% form_id = dom_id(quote_item, :form) %>
 
-<tr id="<%= dom_id(quote_item) %>" class="bg-amber-50 align-top">
+<tr id="<%= dom_id(quote_item) %>" class="bg-amber-50 align-top" data-controller="quote-item-form">
   <td class="px-4 py-4 text-sm font-medium text-stone-900">
     <%= form_with model: [quote, quote_item], id: form_id, class: "hidden" do |f| %><% end %>
 
@@ -10,30 +10,30 @@
     <% end %>
   </td>
   <td class="px-3 py-4 text-sm text-stone-600 align-top">
-    <%= number_field_tag "quote_item[quantity]", quote_item.quantity, min: 0, step: 1, form: form_id, placeholder: "Qty", class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
+    <%= number_field_tag "quote_item[quantity]", quote_item.quantity, min: 0, step: 1, form: form_id, placeholder: "Qty", data: { quote_item_form_target: "quantity", action: "input->quote-item-form#update" }, class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
     <% if quote_item.errors[:quantity].any? %>
       <p class="mt-2 text-xs text-rose-700"><%= quote_item.errors[:quantity].to_sentence %></p>
     <% end %>
   </td>
   <td class="px-3 py-4 text-sm text-stone-600 align-top">
-    <%= number_field_tag "quote_item[unit_price_before_tax_euros]", quote_item.unit_price_before_tax_euros, min: 0, step: 0.01, form: form_id, placeholder: "Amount", class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
+    <%= number_field_tag "quote_item[unit_price_before_tax_euros]", quote_item.unit_price_before_tax_euros, min: 0, step: 0.01, form: form_id, placeholder: "Amount", data: { quote_item_form_target: "unitPrice", action: "input->quote-item-form#update" }, class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
     <% if quote_item.errors[:unit_price_before_tax_in_cents].any? %>
       <p class="mt-2 text-xs text-rose-700"><%= quote_item.errors[:unit_price_before_tax_in_cents].to_sentence %></p>
     <% end %>
   </td>
   <td class="px-3 py-4 text-sm text-stone-600 align-top">
-    <%= select_tag "quote_item[tax_rate]", options_for_select([["0%", 0], ["5%", 5], ["10%", 10], ["20%", 20]], quote_item.tax_rate), form: form_id, class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
+    <%= select_tag "quote_item[tax_rate]", options_for_select([["0%", 0], ["5%", 5], ["10%", 10], ["20%", 20]], quote_item.tax_rate), form: form_id, data: { quote_item_form_target: "taxRate", action: "change->quote-item-form#update" }, class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
     <% if quote_item.errors[:tax_rate].any? %>
       <p class="mt-2 text-xs text-rose-700"><%= quote_item.errors[:tax_rate].to_sentence %></p>
     <% end %>
   </td>
   <td class="px-3 py-4 text-sm text-stone-900 align-top">
-    <div class="flex min-h-12 items-center rounded-xl border border-dashed border-stone-200 bg-stone-50 px-3 text-sm font-medium text-stone-400">
+    <div data-quote-item-form-target="totalHt" class="flex min-h-12 items-center rounded-xl border border-dashed border-stone-200 bg-stone-50 px-3 text-sm font-medium text-stone-400">
       Total HT
     </div>
   </td>
   <td class="px-3 py-4 text-sm font-medium text-stone-900 align-top">
-    <div class="flex min-h-12 items-center rounded-xl border border-dashed border-stone-200 bg-stone-50 px-3 text-sm font-medium text-stone-400">
+    <div data-quote-item-form-target="totalTtc" class="flex min-h-12 items-center rounded-xl border border-dashed border-stone-200 bg-stone-50 px-3 text-sm font-medium text-stone-400">
       Total TTC
     </div>
   </td>
