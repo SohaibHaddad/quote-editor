@@ -7,7 +7,7 @@
 <% if @quote.quote_items.reload.none? %>
   <%= turbo_stream.append "quote_items_rows" do %>
     <tr id="empty_quote_items_row">
-      <td colspan="7" class="px-4 py-10 text-sm text-stone-600">No items on this quote yet.</td>
+      <td colspan="<%= @quote.validated? ? 6 : 7 %>" class="px-4 py-10 text-sm text-stone-600">No items on this quote yet.</td>
     </tr>
   <% end %>
 <% end %>

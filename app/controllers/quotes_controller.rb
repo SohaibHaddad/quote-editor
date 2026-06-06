@@ -1,5 +1,5 @@
 class QuotesController < ApplicationController
-  before_action :set_quote, only: [:show, :edit, :update, :destroy]
+  before_action :set_quote, only: [:show, :edit, :update, :destroy, :validate_quote]
   before_action :load_quotes, only: [:index, :destroy]
 
   def index
@@ -62,6 +62,13 @@ class QuotesController < ApplicationController
     respond_to do |format|
       format.turbo_stream
     end
+  end
+
+  def validate_quote
+    @quote.validate_quote
+    @quote.save
+
+    redirect_to quote_path(@quote)
   end
 
   private

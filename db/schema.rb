@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_06_135648) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_06_194700) do
   create_table "partners", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -36,9 +36,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_06_135648) do
     t.integer "created_by_id", null: false
     t.string "name", null: false
     t.integer "partner_id", null: false
+    t.integer "state", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_quotes_on_created_by_id"
     t.index ["partner_id"], name: "index_quotes_on_partner_id"
+    t.check_constraint "state IN (0, 1)", name: "quotes_state_valid"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,7 +54,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_06_135648) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "quote_items", "quotes"
+  add_foreign_key "quote_items", "quotes", on_delete: :cascade
   add_foreign_key "quotes", "partners"
   add_foreign_key "quotes", "users", column: "created_by_id"
   add_foreign_key "users", "partners"

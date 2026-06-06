@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <button class="mt-6 inline-flex w-full items-center justify-center rounded-full bg-amber-400 px-5 py-3 text-sm font-semibold text-stone-950 transition hover:bg-amber-300" type="button">
-    Validate quote
-  </button>
+  <% unless quote.validated? %>
+    <%= button_to "Validate quote", validate_quote_quote_path(quote), method: :patch, disabled: !quote.can_validate_quote?, class: "mt-6 inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition #{quote.can_validate_quote? ? "bg-amber-400 text-stone-950 hover:bg-amber-300" : "cursor-not-allowed bg-stone-200 text-stone-500"}" %>
+  <% end %>
 </aside>

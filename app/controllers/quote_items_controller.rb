@@ -1,5 +1,6 @@
 class QuoteItemsController < ApplicationController
   before_action :set_quote
+  before_action :ensure_quote_is_editable
   before_action :set_quote_item, only: [:edit, :update, :destroy]
 
   def new
@@ -63,5 +64,9 @@ class QuoteItemsController < ApplicationController
 
   def quote_item_params
     params.require(:quote_item).permit(:name, :quantity, :tax_rate, :unit_price_before_tax_in_cents)
+  end
+
+  def ensure_quote_is_editable
+    head :forbidden if @quote.validated?
   end
 end

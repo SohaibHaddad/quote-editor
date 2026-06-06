@@ -1,4 +1,6 @@
 <section class="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm">
+  <% show_actions = !quote.validated? %>
+
   <div class="overflow-x-auto">
     <table class="min-w-full divide-y divide-stone-200">
       <thead class="bg-stone-50">
@@ -9,7 +11,9 @@
           <th class="px-3 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">TVA</th>
           <th class="px-3 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">Total HT</th>
           <th class="px-3 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">Total TTC</th>
-          <th class="px-4 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">Actions</th>
+          <% if show_actions %>
+            <th class="px-4 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">Actions</th>
+          <% end %>
         </tr>
       </thead>
       <tbody id="quote_items_rows" class="divide-y divide-stone-200 bg-white">
@@ -19,7 +23,7 @@
           <% end %>
         <% else %>
           <tr id="empty_quote_items_row">
-            <td colspan="7" class="px-4 py-10 text-sm text-stone-600">No items on this quote yet.</td>
+            <td colspan="<%= show_actions ? 7 : 6 %>" class="px-4 py-10 text-sm text-stone-600">No items on this quote yet.</td>
           </tr>
         <% end %>
         <%= render "quote_items/new_row", quote: quote %>
