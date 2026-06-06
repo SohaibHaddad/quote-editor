@@ -1,3 +1,12 @@
+# Database fields:
+# - id: integer
+# - name: string
+# - quote_id: integer
+# - quantity: integer
+# - tax_rate: decimal
+# - unit_price_before_tax_in_cents: integer
+# - created_at: datetime
+# - updated_at: datetime
 class QuoteItem < ApplicationRecord
   belongs_to :quote
 

@@ -1,3 +1,11 @@
+# Database fields:
+# - id: integer
+# - name: string
+# - partner_id: integer
+# - created_by_id: integer
+# - state: integer
+# - created_at: datetime
+# - updated_at: datetime
 class Quote < ApplicationRecord
   belongs_to :partner
   belongs_to :created_by, class_name: "User"

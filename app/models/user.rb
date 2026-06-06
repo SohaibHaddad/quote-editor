@@ -1,3 +1,11 @@
+# Database fields:
+# - id: integer
+# - username: string
+# - encrypted_password: string
+# - partner_id: integer
+# - remember_created_at: datetime
+# - created_at: datetime
+# - updated_at: datetime
 class User < ApplicationRecord
   devise :database_authenticatable, :rememberable
 
