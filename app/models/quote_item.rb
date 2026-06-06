@@ -18,6 +18,12 @@ class QuoteItem < ApplicationRecord
     presence: true,
     numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 
+  # Prices are stored as integer cents in `unit_price_before_tax_in_cents`
+  # rather than decimal euros because floating-point numbers cannot represent
+  # many decimal values exactly. For example, values like 0.1 or 12.34 may be
+  # stored internally as approximations, which can introduce rounding errors in
+  # totals, taxes, and comparisons. Using integer cents keeps money calculations
+  # deterministic and avoids those precision issues.
   def unit_price_before_tax_euros
     return @unit_price_before_tax_euros if defined?(@unit_price_before_tax_euros)
     return if unit_price_before_tax_in_cents.nil?

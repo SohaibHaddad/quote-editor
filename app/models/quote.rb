@@ -8,6 +8,9 @@
 # - updated_at: datetime
 class Quote < ApplicationRecord
   belongs_to :partner
+  # `created_by` tracks which user originally created the quote, but in this
+  # simplified application every user belonging to the same partner can still
+  # view, modify, and delete that partner's quotes.
   belongs_to :created_by, class_name: "User"
   has_many :quote_items, dependent: :destroy
 
