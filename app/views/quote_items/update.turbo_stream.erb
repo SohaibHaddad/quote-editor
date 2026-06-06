@@ -1,0 +1,13 @@
+<%= turbo_stream.replace dom_id(@quote_item) do %>
+  <% if @quote_item.errors.any? %>
+    <%= render "quote_items/edit_row", quote: @quote, quote_item: @quote_item %>
+  <% else %>
+    <%= render "quote_items/row", quote: @quote, quote_item: @quote_item %>
+  <% end %>
+<% end %>
+
+<% unless @quote_item.errors.any? %>
+  <%= turbo_stream.replace "quote_totals" do %>
+    <%= render "quote_items/totals", quote: @quote %>
+  <% end %>
+<% end %>

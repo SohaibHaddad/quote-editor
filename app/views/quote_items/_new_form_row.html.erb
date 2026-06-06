@@ -1,0 +1,50 @@
+<% form_id = dom_id(quote_item, :form) %>
+
+<tr id="new_quote_item_row" class="bg-amber-50/60 align-top">
+  <td class="px-4 py-4 text-sm font-medium text-stone-900">
+    <%= form_with model: [quote, quote_item], id: form_id, class: "hidden" do |f| %><% end %>
+
+    <%= text_field_tag "quote_item[name]", quote_item.name, form: form_id, placeholder: "Article name", class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
+    <% if quote_item.errors[:name].any? %>
+      <p class="mt-2 text-xs text-rose-700"><%= quote_item.errors[:name].to_sentence %></p>
+    <% end %>
+  </td>
+  <td class="px-3 py-4 text-sm text-stone-600 align-top">
+    <%= number_field_tag "quote_item[quantity]", quote_item.quantity, min: 0, step: 1, form: form_id, placeholder: "Qty", class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
+    <% if quote_item.errors[:quantity].any? %>
+      <p class="mt-2 text-xs text-rose-700"><%= quote_item.errors[:quantity].to_sentence %></p>
+    <% end %>
+  </td>
+  <td class="px-3 py-4 text-sm text-stone-600 align-top">
+    <%= number_field_tag "quote_item[unit_price_before_tax_in_cents]", quote_item.unit_price_before_tax_in_cents, min: 0, step: 1, form: form_id, placeholder: "Amount", class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
+    <% if quote_item.errors[:unit_price_before_tax_in_cents].any? %>
+      <p class="mt-2 text-xs text-rose-700"><%= quote_item.errors[:unit_price_before_tax_in_cents].to_sentence %></p>
+    <% end %>
+  </td>
+  <td class="px-3 py-4 text-sm text-stone-600 align-top">
+    <%= select_tag "quote_item[tax_rate]", options_for_select([["0%", 0], ["5%", 5], ["10%", 10], ["20%", 20]], quote_item.tax_rate), form: form_id, class: "block w-full rounded-xl border border-stone-300 bg-white px-3 py-3 text-sm text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
+    <% if quote_item.errors[:tax_rate].any? %>
+      <p class="mt-2 text-xs text-rose-700"><%= quote_item.errors[:tax_rate].to_sentence %></p>
+    <% end %>
+  </td>
+  <td class="px-3 py-4 text-sm text-stone-900 align-top">
+    <div class="flex min-h-12 items-center rounded-xl border border-dashed border-stone-200 bg-stone-50 px-3 text-sm font-medium text-stone-400">
+      Total HT
+    </div>
+  </td>
+  <td class="px-3 py-4 text-sm font-medium text-stone-900 align-top">
+    <div class="flex min-h-12 items-center rounded-xl border border-dashed border-stone-200 bg-stone-50 px-3 text-sm font-medium text-stone-400">
+      Total TTC
+    </div>
+  </td>
+  <td class="px-4 py-4 align-top">
+    <div class="flex flex-wrap gap-2">
+      <%= button_tag type: "submit", form: form_id, title: submit_label, aria: { label: submit_label }, class: "inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-400 text-stone-950 transition hover:bg-amber-300" do %>
+        <%= image_tag "icons/quote-add.svg", alt: "", class: "h-5 w-5" %>
+      <% end %>
+      <%= link_to quote_path(quote), title: "Cancel", aria: { label: "Cancel new item" }, class: "inline-flex h-12 w-12 items-center justify-center rounded-xl border border-stone-300 text-stone-700 transition hover:bg-stone-50" do %>
+        <%= image_tag "icons/quote-cancel.svg", alt: "", class: "h-5 w-5" %>
+      <% end %>
+    </div>
+  </td>
+</tr>

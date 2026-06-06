@@ -1,0 +1,13 @@
+<%= turbo_stream.remove dom_id(@quote_item) %>
+
+<%= turbo_stream.replace "quote_totals" do %>
+  <%= render "quote_items/totals", quote: @quote %>
+<% end %>
+
+<% if @quote.quote_items.reload.none? %>
+  <%= turbo_stream.append "quote_items_rows" do %>
+    <tr id="empty_quote_items_row">
+      <td colspan="7" class="px-4 py-10 text-sm text-stone-600">No items on this quote yet.</td>
+    </tr>
+  <% end %>
+<% end %>

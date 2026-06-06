@@ -33,6 +33,8 @@ class QuotesController < ApplicationController
   end
 
   def show
+    @quote_items = @quote.quote_items.order(:created_at)
+    @quote_item = @quote.quote_items.new
   end
 
   def edit

@@ -9,8 +9,12 @@ class QuoteItem < ApplicationRecord
     presence: true,
     numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 
+  def unit_price_before_tax
+    unit_price_before_tax_in_cents.to_d / 100
+  end
+
   def price_before_tax
-    unit_price_before_tax_in_cents.to_d * quantity.to_d / 100
+    unit_price_before_tax * quantity.to_d
   end
 
   def price_after_tax

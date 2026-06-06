@@ -1,0 +1,17 @@
+<% if @quote_item.persisted? %>
+  <%= turbo_stream.remove "empty_quote_items_row" %>
+  <%= turbo_stream.replace "new_quote_item_row" do %>
+    <%= render "quote_items/row", quote: @quote, quote_item: @quote_item %>
+  <% end %>
+  <%= turbo_stream.append "quote_items_rows" do %>
+    <%= render "quote_items/new_row", quote: @quote %>
+  <% end %>
+  <%= turbo_stream.replace "quote_totals" do %>
+    <%= render "quote_items/totals", quote: @quote %>
+  <% end %>
+<% end %>
+<% unless @quote_item.persisted? %>
+  <%= turbo_stream.replace "new_quote_item_row" do %>
+    <%= render "quote_items/new_form_row", quote: @quote, quote_item: @quote_item, submit_label: "Add item" %>
+  <% end %>
+<% end %>

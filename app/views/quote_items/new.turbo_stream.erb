@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "new_quote_item_row" do %>
+  <%= render "quote_items/new_form_row", quote: @quote, quote_item: @quote_item, submit_label: "Add item" %>
+<% end %>
