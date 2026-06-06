@@ -9,14 +9,11 @@
       <p class="mt-2 text-2xl font-semibold text-stone-950"><%= @quotes_count %></p>
     </div>
   <% end %>
-<% end %>
-
-<%= turbo_stream.replace "quote_form" do %>
-  <%= turbo_frame_tag "quote_form" do %>
-    <% if @quote.persisted? %>
-      <%= render "new_button" %>
-    <% else %>
-      <%= render "form", quote: @quote %>
-    <% end %>
+  <%= turbo_stream.replace "new_quote_row" do %>
+    <%= render "new_row" %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.replace "new_quote_row" do %>
+    <%= render "new_form_row", quote: @quote %>
   <% end %>
 <% end %>

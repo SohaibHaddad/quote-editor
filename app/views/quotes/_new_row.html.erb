@@ -1,0 +1,7 @@
+<tr id="new_quote_row">
+  <td colspan="5" class="px-6 py-6">
+    <%= link_to new_quote_path, data: { turbo_stream: true }, title: t("quotes.index.actions.add_quote"), aria: { label: t("quotes.index.actions.add_quote") }, class: "inline-flex min-h-14 w-full items-center justify-center rounded-2xl border border-dashed border-stone-300 bg-white px-5 py-3 text-stone-900 transition hover:bg-stone-50" do %>
+      <%= image_tag "icons/quote-add.svg", alt: "", class: "h-5 w-5" %>
+    <% end %>
+  </td>
+</tr>
