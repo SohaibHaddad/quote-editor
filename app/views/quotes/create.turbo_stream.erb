@@ -1,0 +1,22 @@
+<% if @quote.persisted? %>
+  <%= turbo_stream.remove "empty_quotes_row" %>
+  <%= turbo_stream.prepend "quotes_rows" do %>
+    <%= render "quote_row", quote: @quote %>
+  <% end %>
+  <%= turbo_stream.replace "quotes_count" do %>
+    <div id="quotes_count" class="rounded-2xl bg-stone-100 px-4 py-3 text-center">
+      <p class="text-xs font-semibold uppercase tracking-wide text-stone-500">Total Quotes</p>
+      <p class="mt-2 text-2xl font-semibold text-stone-950"><%= @quotes_count %></p>
+    </div>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.replace "quote_form" do %>
+  <%= turbo_frame_tag "quote_form" do %>
+    <% if @quote.persisted? %>
+      <%= render "new_button" %>
+    <% else %>
+      <%= render "form", quote: @quote %>
+    <% end %>
+  <% end %>
+<% end %>

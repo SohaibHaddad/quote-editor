@@ -1,0 +1,27 @@
+<section id="quotes_table" class="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm">
+  <div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-stone-200">
+      <thead class="bg-stone-50">
+        <tr>
+          <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">ID</th>
+          <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">Creation Date</th>
+          <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">Name</th>
+          <th class="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-stone-500">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="quotes_rows" class="divide-y divide-stone-200 bg-white">
+        <% if quotes.any? %>
+          <% quotes.each do |quote| %>
+            <%= render "quote_row", quote: quote %>
+          <% end %>
+        <% else %>
+          <tr id="empty_quotes_row">
+            <td colspan="4" class="px-6 py-10 text-sm leading-7 text-stone-600">
+              No quotes found for your partner yet.
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

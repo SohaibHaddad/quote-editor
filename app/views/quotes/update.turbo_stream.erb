@@ -1,0 +1,7 @@
+<%= turbo_stream.replace dom_id(@quote) do %>
+  <% if @quote.errors.any? %>
+    <%= render "quote_edit_row", quote: @quote %>
+  <% else %>
+    <%= render "quote_row", quote: @quote %>
+  <% end %>
+<% end %>

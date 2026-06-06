@@ -1,0 +1,8 @@
+<div class="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-8 px-6 py-10">
+  <%= render "header", quotes: @quotes %>
+  <%= render "table", quotes: @quotes %>
+
+  <%= turbo_frame_tag "quote_form" do %>
+    <%= render "new_button" %>
+  <% end %>
+</div>

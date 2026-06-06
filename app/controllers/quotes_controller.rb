@@ -1,0 +1,80 @@
+class QuotesController < ApplicationController
+  before_action :set_quote, only: [:show, :edit, :update, :destroy]
+  before_action :load_quotes, only: [:index, :destroy]
+
+  def index
+    @quote = Quote.new
+  end
+
+  def new
+    @quote = current_user.partner.quotes.new
+    @quote.created_by = current_user
+
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
+  def create
+    @quote = current_user.partner.quotes.new(quote_params)
+    @quote.created_by = current_user
+
+    if @quote.save
+      @quotes_count = current_user.partner.quotes.count
+
+      respond_to do |format|
+        format.turbo_stream
+      end
+    else
+      respond_to do |format|
+        format.turbo_stream { render :create, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def show
+  end
+
+  def edit
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
+  def update
+    if @quote.update(quote_params)
+      respond_to do |format|
+        format.turbo_stream
+      end
+    else
+      respond_to do |format|
+        format.turbo_stream { render :update, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @quote.destroy
+    load_quotes
+
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
+  private
+
+  def load_quotes
+    @quotes = current_user.partner.quotes
+      .includes(:partner, :created_by, :quote_items)
+      .order(created_at: :desc)
+  end
+
+  def set_quote
+    @quote = current_user.partner.quotes.includes(:created_by, :quote_items).find(params[:id])
+  end
+
+  def quote_params
+    params.require(:quote).permit(:name)
+  end
+end

@@ -1,0 +1,19 @@
+<tr id="<%= dom_id(quote) %>" class="bg-emerald-50 align-middle">
+  <td colspan="4" class="px-6 py-5">
+    <%= form_with model: quote, class: "space-y-4" do |f| %>
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end">
+        <div class="w-full">
+          <%= f.text_field :name, autofocus: true, placeholder: "Quote name", class: "block w-full rounded-2xl border border-stone-300 bg-white px-4 py-3 text-stone-900 outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200" %>
+          <% if quote.errors.any? %>
+            <p class="mt-2 text-sm text-rose-700"><%= quote.errors.full_messages.to_sentence %></p>
+          <% end %>
+        </div>
+
+        <div class="flex shrink-0 flex-wrap gap-3">
+          <%= f.submit "Save changes", class: "inline-flex items-center justify-center rounded-full bg-stone-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-stone-800" %>
+          <%= link_to "Cancel", quotes_path, data: { turbo_frame: "_top" }, class: "inline-flex items-center justify-center rounded-full border border-stone-300 px-5 py-3 text-sm font-semibold text-stone-700 transition hover:bg-stone-50" %>
+        </div>
+      </div>
+    <% end %>
+  </td>
+</tr>
