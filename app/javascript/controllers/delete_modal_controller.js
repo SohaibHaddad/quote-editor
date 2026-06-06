@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["modal", "form", "title", "message"]
+  static targets = ["modal", "form", "message"]
 
   open(event) {
     const { deleteUrl, deleteMessage } = event.currentTarget.dataset
