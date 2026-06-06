@@ -1,11 +1,21 @@
 class QuoteItemsController < ApplicationController
   before_action :set_quote
   before_action :ensure_quote_is_editable
-  before_action :set_quote_item, only: [:edit, :update, :destroy]
+  before_action :set_quote_item, only: [:edit, :update, :destroy, :cancel_edit]
 
   def new
     @quote_item = @quote.quote_items.new
 
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
+  # This restores the inline "new quote item" row in place with Turbo instead
+  # of navigating back to the quote show page. A full page reload would reset
+  # the scroll position, which creates a poor user experience because the user
+  # loses their place in the items table after cancelling the inline form.
+  def cancel_new
     respond_to do |format|
       format.turbo_stream
     end
@@ -40,6 +50,16 @@ class QuoteItemsController < ApplicationController
       respond_to do |format|
         format.turbo_stream { render :update, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # This restores the inline quote item edit row in place with Turbo instead
+  # of navigating back to the quote show page. A full page reload would reset
+  # the scroll position, which creates a poor user experience because the user
+  # loses their place in the items table after cancelling the inline form.
+  def cancel_edit
+    respond_to do |format|
+      format.turbo_stream
     end
   end
 

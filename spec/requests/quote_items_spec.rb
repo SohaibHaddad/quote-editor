@@ -25,6 +25,24 @@ RSpec.describe "QuoteItems", type: :request do
     end
   end
 
+  describe "GET /quotes/:quote_id/quote_items/cancel_new" do
+    it "renders the new quote item row again for a draft quote" do
+      get cancel_new_quote_quote_items_path(quote_record, format: :turbo_stream), headers: turbo_stream_headers
+
+      expect(response).to have_http_status(:ok)
+      expect(response.media_type).to eq Mime[:turbo_stream].to_s
+      expect(response.body).to include('target="new_quote_item_row"')
+    end
+
+    it "returns forbidden for a validated quote" do
+      quote_record.update_column(:state, 1)
+
+      get cancel_new_quote_quote_items_path(quote_record, format: :turbo_stream), headers: turbo_stream_headers
+
+      expect(response).to have_http_status(:forbidden)
+    end
+  end
+
   describe "POST /quotes/:quote_id/quote_items" do
     let(:params) do
       {
@@ -86,6 +104,27 @@ RSpec.describe "QuoteItems", type: :request do
       quote_record.update_column(:state, 1)
 
       get edit_quote_quote_item_path(quote_record, quote_item, format: :turbo_stream), headers: turbo_stream_headers
+
+      expect(response).to have_http_status(:forbidden)
+    end
+  end
+
+  describe "GET /quotes/:quote_id/quote_items/:id/cancel_edit" do
+    it "renders the quote item row again for a draft quote" do
+      quote_item = create(:quote_item, quote: quote_record)
+
+      get cancel_edit_quote_quote_item_path(quote_record, quote_item, format: :turbo_stream), headers: turbo_stream_headers
+
+      expect(response).to have_http_status(:ok)
+      expect(response.media_type).to eq Mime[:turbo_stream].to_s
+      expect(response.body).to include(%(target="#{ActionView::RecordIdentifier.dom_id(quote_item)}"))
+    end
+
+    it "returns forbidden for a validated quote" do
+      quote_item = create(:quote_item, quote: quote_record)
+      quote_record.update_column(:state, 1)
+
+      get cancel_edit_quote_quote_item_path(quote_record, quote_item, format: :turbo_stream), headers: turbo_stream_headers
 
       expect(response).to have_http_status(:forbidden)
     end

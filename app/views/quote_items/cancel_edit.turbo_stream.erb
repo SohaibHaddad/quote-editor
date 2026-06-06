@@ -1,0 +1,3 @@
+<%= turbo_stream.replace dom_id(@quote_item) do %>
+  <%= render "quote_items/row", quote: @quote, quote_item: @quote_item %>
+<% end %>

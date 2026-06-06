@@ -10,7 +10,15 @@ Rails.application.routes.draw do
     get :cancel_edit, on: :member
     
     patch :validate_quote, on: :member
-    resources :quote_items, only: [:new, :create, :edit, :update, :destroy]
+    resources :quote_items, only: [:new, :create, :edit, :update, :destroy] do
+      # These custom cancel routes restore the inline quote item rows in place.
+      # Without them, the cancel buttons would navigate back to the quote show
+      # page, which reloads the page and resets the user's scroll position.
+      # That scroll jump creates a poor user experience because the user loses
+      # their place in the items table after cancelling the inline form.
+      get :cancel_new, on: :collection
+      get :cancel_edit, on: :member
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

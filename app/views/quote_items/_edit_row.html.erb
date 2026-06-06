@@ -42,7 +42,7 @@
       <%= button_tag type: "submit", form: form_id, title: t("quote_items.actions.save_item"), aria: { label: t("quote_items.actions.save_item") }, class: "inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-400 text-stone-950 transition hover:bg-amber-300" do %>
         <%= image_tag "icons/quote-add.svg", alt: "", class: "h-5 w-5" %>
       <% end %>
-      <%= link_to quote_path(quote), title: t("actions.cancel"), aria: { label: t("quote_items.actions.cancel_edit_item") }, class: "inline-flex h-12 w-12 items-center justify-center rounded-xl border border-stone-300 text-stone-700 transition hover:bg-stone-50" do %>
+      <%= link_to cancel_edit_quote_quote_item_path(quote, quote_item), data: { turbo_stream: true }, title: t("actions.cancel"), aria: { label: t("quote_items.actions.cancel_edit_item") }, class: "inline-flex h-12 w-12 items-center justify-center rounded-xl border border-stone-300 text-stone-700 transition hover:bg-stone-50" do %>
         <%= image_tag "icons/quote-cancel.svg", alt: "", class: "h-5 w-5" %>
       <% end %>
     </div>
