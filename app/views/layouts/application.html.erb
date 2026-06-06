@@ -23,7 +23,31 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="min-h-screen bg-stone-100 text-stone-900">
+    <% if notice.present? || alert.present? %>
+      <div class="fixed inset-x-0 top-4 z-50 mx-auto flex max-w-xl flex-col gap-2 px-4">
+        <% if notice.present? %>
+          <p class="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 shadow-sm"><%= notice %></p>
+        <% end %>
+        <% if alert.present? %>
+          <p class="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800 shadow-sm"><%= alert %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <header class="border-b border-stone-200 bg-white/90 backdrop-blur">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.24em] text-stone-500">Quote Editor</p>
+            <p class="mt-1 text-sm text-stone-600">Signed in as <span class="font-medium text-stone-900"><%= current_user.username %></span></p>
+          </div>
+
+          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "inline-flex items-center justify-center rounded-full border border-stone-300 bg-white px-4 py-2 text-sm font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-50" %>
+        </div>
+      </header>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
