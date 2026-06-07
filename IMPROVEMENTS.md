@@ -9,6 +9,7 @@ This document lists the main areas I would improve next if this project moved be
 - [Tax Rates](#tax-rates)
 - [Auditing](#auditing)
 - [PDF Generation and Sending](#pdf-generation-and-sending)
+- [Quote Listing Scalability](#quote-listing-scalability)
 - [Testing](#testing)
 - [UI and UX](#ui-and-ux)
 - [Partner Groups](#partner-groups)
@@ -444,6 +445,64 @@ end
   - if the business wants to change it later, a new quote version or a new quote should probably be created
 
 - This feature would move the editor closer to a complete operational workflow: prepare, validate, generate, and send.
+
+## Quote Listing Scalability
+
+- On the home page, I would add pagination or cursor-based loading instead of loading all quotes at once.
+
+- The current implementation is acceptable for a small demo dataset, but it would become inefficient as soon as a partner accumulates a large number of quotes.
+  Loading everything on each visit would hurt:
+  - SQL query cost
+  - memory usage
+  - rendering time
+  - Turbo updates on a large table
+
+- A traditional first step would be page-based pagination.
+  For example, the index could load 25 or 50 quotes at a time.
+
+- A more scalable option would be cursor-based pagination.
+  This is especially useful when:
+  - the dataset grows large
+  - ordering is stable
+  - the user mainly browses forward through recent quotes
+
+- Because the current table is already ordered by descending id, a cursor strategy would fit well.
+  A simple example would be:
+
+```rb
+# app/controllers/quotes_controller.rb
+def index
+  scope = current_user.partner.quotes
+    .includes(:partner, :created_by, :quote_items)
+    .order(id: :desc)
+
+  @quotes = if params[:before_id].present?
+    scope.where("id < ?", params[:before_id]).limit(25)
+  else
+    scope.limit(25)
+  end
+end
+```
+
+- The UI could then expose:
+  - a classic `Next page` link
+  - or an infinite-scroll / `Load more` interaction with Turbo
+
+- This would keep the home page responsive even for partners with a long quote history, while preserving the current table-based experience.
+
+- In the same area, I would also add search and filtering capabilities.
+  Pagination alone helps with performance, but users also need fast ways to find the right quote.
+
+- Useful filters would include:
+  - search by quote name
+  - filter by month
+  - filter by state
+  - filter by creator
+  - later, filter by client once clients are introduced
+
+- This would make the home page more useful as both:
+  - a recent activity list
+  - and a real quote management screen for partners with a large history
 
 ## Testing
 
