@@ -15,6 +15,6 @@
   </div>
 
   <% unless quote.validated? %>
-    <%= button_to t("quote_items.totals.validate_quote"), validate_quote_quote_path(quote), method: :patch, disabled: !quote.can_validate_quote?, class: "mt-6 inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition #{quote.can_validate_quote? ? "bg-amber-400 text-stone-950 hover:bg-amber-300" : "cursor-not-allowed bg-stone-200 text-stone-500"}" %>
+    <%= button_to t("quote_items.totals.validate_quote"), validate_quote_quote_path(quote), method: :patch, disabled: !quote.can_validate_quote?, form: { data: { action: "submit->quote-item-guard#blockIfUnsaved" } }, class: "mt-6 inline-flex w-full items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition #{quote.can_validate_quote? ? "bg-amber-400 text-stone-950 hover:bg-amber-300" : "cursor-not-allowed bg-stone-200 text-stone-500"}" %>
   <% end %>
 </aside>

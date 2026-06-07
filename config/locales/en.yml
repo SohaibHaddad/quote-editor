@@ -5,6 +5,7 @@ en:
     cancel: "Cancel"
     delete: "Delete"
     edit: "Edit"
+    ok: "OK"
     save_changes: "Save changes"
     see: "See"
   layout:
@@ -28,6 +29,8 @@ en:
         instructions: "Enter the credentials for a seeded user account."
         remember_me: "Remember me"
   quotes:
+    unsaved_changes:
+      message: "Save or cancel the current quote changes before opening another quote action."
     states:
       in_draft: "In draft"
       validated: "Validated"
@@ -88,6 +91,8 @@ en:
       save_item: "Save item"
       cancel_new_item: "Cancel new item"
       cancel_edit_item: "Cancel edit item"
+    unsaved_changes:
+      message: "Save or cancel the current quote item changes before leaving this page or validating the quote."
   date:
     formats:
       default: "%Y-%m-%d"

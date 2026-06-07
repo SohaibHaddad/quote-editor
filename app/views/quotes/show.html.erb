@@ -1,7 +1,7 @@
-<div class="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-8 px-6 py-10">
+<div data-controller="quote-item-guard" data-quote-item-guard-form-row-selector-value="[data-quote-item-form-row='true']" data-quote-item-guard-message-value="<%= t("quote_items.unsaved_changes.message") %>" class="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-8 px-6 py-10">
   <section class="flex flex-col gap-6 rounded-3xl border border-stone-200 bg-white p-8 shadow-lg">
     <div class="flex flex-wrap items-center justify-between gap-4">
-      <%= link_to quotes_path, class: "inline-flex items-center gap-2 rounded-full border border-stone-300 px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-stone-50" do %>
+      <%= link_to quotes_path, data: { action: "click->quote-item-guard#blockIfUnsaved" }, class: "inline-flex items-center gap-2 rounded-full border border-stone-300 px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-stone-50" do %>
         <span aria-hidden="true">&larr;</span>
         <span><%= t("quotes.show.back") %></span>
       <% end %>
@@ -35,4 +35,6 @@
       </div>
     </div>
   </section>
+
+  <%= render "shared/unsaved_quote_item_modal", message: t("quote_items.unsaved_changes.message") %>
 </div>

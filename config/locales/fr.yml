@@ -5,6 +5,7 @@ fr:
     cancel: "Annuler"
     delete: "Supprimer"
     edit: "Modifier"
+    ok: "OK"
     save_changes: "Enregistrer"
     see: "Voir"
   layout:
@@ -17,6 +18,8 @@ fr:
   delete_modal:
     default_message: "Cette action est irréversible."
   quotes:
+    unsaved_changes:
+      message: "Enregistrez ou annulez les modifications en cours sur le devis avant de lancer une autre action."
     states:
       in_draft: "Brouillon"
       validated: "Validé"
@@ -77,6 +80,8 @@ fr:
       save_item: "Enregistrer l'article"
       cancel_new_item: "Annuler l'ajout d'article"
       cancel_edit_item: "Annuler la modification de l'article"
+    unsaved_changes:
+      message: "Enregistrez ou annulez les modifications en cours sur l'article avant de quitter cette page ou de valider le devis."
   date:
     formats:
       default: "%d/%m/%Y"

@@ -1,6 +1,6 @@
 <% form_id = dom_id(quote_item, :form) %>
 
-<tr id="new_quote_item_row" class="bg-amber-50/60 align-top" data-controller="quote-item-form" data-quote-item-form-total-ht-placeholder-value="<%= t("quote_items.form.total_ht_placeholder") %>" data-quote-item-form-total-ttc-placeholder-value="<%= t("quote_items.form.total_ttc_placeholder") %>">
+<tr id="new_quote_item_row" data-quote-item-form-row="true" class="bg-amber-50/60 align-top" data-controller="quote-item-form" data-quote-item-form-total-ht-placeholder-value="<%= t("quote_items.form.total_ht_placeholder") %>" data-quote-item-form-total-ttc-placeholder-value="<%= t("quote_items.form.total_ttc_placeholder") %>">
   <td class="px-4 py-4 text-sm font-medium text-stone-900">
     <%= form_with model: [quote, quote_item], id: form_id, class: "hidden" do |f| %><% end %>
 

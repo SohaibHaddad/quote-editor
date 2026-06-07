@@ -1,6 +1,6 @@
 <% form_id = dom_id(quote, :form) %>
 
-<tr id="<%= dom_id(quote) %>" class="bg-emerald-50 align-middle">
+<tr id="<%= dom_id(quote) %>" data-quote-form-row="true" class="bg-emerald-50 align-middle">
   <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-stone-900">
     <%= quote.id %>
     <%= form_with model: quote, id: form_id, class: "hidden" do |f| %><% end %>

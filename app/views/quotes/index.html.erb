@@ -1,4 +1,6 @@
-<div class="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-8 px-6 py-10">
+<div data-controller="quote-item-guard" data-quote-item-guard-form-row-selector-value="[data-quote-form-row='true']" data-quote-item-guard-message-value="<%= t("quotes.unsaved_changes.message") %>" class="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-8 px-6 py-10">
   <%= render "header", quotes: @quotes %>
   <%= render "table", quotes: @quotes %>
+
+  <%= render "shared/unsaved_quote_item_modal", message: t("quotes.unsaved_changes.message") %>
 </div>
