@@ -34,7 +34,8 @@ The UI uses Hotwire:
 ## Tech Stack
 
 - Ruby on Rails 8.1
-- SQLite
+- SQLite in development and test
+- PostgreSQL in production
 - Hotwire (`turbo-rails`, `stimulus-rails`)
 - Tailwind CSS
 - Devise
@@ -47,11 +48,13 @@ The UI uses Hotwire:
 - Ruby
 - Bundler
 - Node.js and npm
-- SQLite
+- SQLite for local development
+- PostgreSQL for production deployments such as Heroku
 
 The project currently uses:
 - Rails `8.1.3`
-- SQLite via the `sqlite3` gem
+- SQLite via the `sqlite3` gem in development and test
+- PostgreSQL via the `pg` gem in production
 
 ## Setup
 
@@ -256,5 +259,5 @@ French is the default locale.
 ## Notes
 
 - Currency display is currently forced to euro in both locales.
-- The application uses SQLite for simplicity in the context of the test.
+- The application uses SQLite locally and PostgreSQL in production.
 - The codebase includes both Ruby and JavaScript automated tests.
