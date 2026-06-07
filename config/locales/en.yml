@@ -91,3 +91,11 @@ en:
   date:
     formats:
       default: "%Y-%m-%d"
+  number:
+    currency:
+      format:
+        unit: "€"
+        format: "%u%n"
+        separator: "."
+        delimiter: ","
+        precision: 2

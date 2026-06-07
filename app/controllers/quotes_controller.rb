@@ -44,7 +44,7 @@ class QuotesController < ApplicationController
   end
 
   def show
-    @quote_items = @quote.quote_items.order(:created_at)
+    @quote_items = @quote.quote_items.order(:id)
     @quote_item = @quote.quote_items.new
   end
 
@@ -97,7 +97,7 @@ class QuotesController < ApplicationController
   def load_quotes
     @quotes = current_user.partner.quotes
       .includes(:partner, :created_by, :quote_items)
-      .order(created_at: :desc)
+      .order(id: :desc)
   end
 
   def set_quote

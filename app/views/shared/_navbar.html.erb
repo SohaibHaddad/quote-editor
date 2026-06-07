@@ -1,0 +1,24 @@
+<header class="border-b border-stone-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <div>
+      <p class="text-sm font-semibold uppercase tracking-[0.24em] text-stone-500"><%= t("app.name") %></p>
+      <p class="mt-1 text-sm text-stone-600"><%= t("layout.signed_in_as_html", username: content_tag(:span, current_user.username, class: "font-medium text-stone-900")) %></p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <%= form_with url: request.path, method: :get, class: "flex items-center gap-2" do %>
+        <label for="locale-switcher" class="text-sm font-medium text-stone-600"><%= t("layout.language") %></label>
+        <%= select_tag :locale,
+          options_for_select([
+            [t("locales.fr"), "fr"],
+            [t("locales.en"), "en"]
+          ], I18n.locale),
+          id: "locale-switcher",
+          onchange: "this.form.requestSubmit()",
+          class: "rounded-full border border-stone-300 bg-white px-3 py-2 text-sm text-stone-700 outline-none transition hover:border-stone-400" %>
+      <% end %>
+
+      <%= button_to t("layout.sign_out"), destroy_user_session_path, method: :delete, class: "inline-flex items-center justify-center rounded-full border border-stone-300 bg-white px-4 py-2 text-sm font-semibold text-stone-700 transition hover:border-stone-400 hover:bg-stone-50" %>
+    </div>
+  </div>
+</header>
