@@ -1,7 +1,7 @@
 class QuotesController < ApplicationController
-  before_action :set_quote, only: [:show, :edit, :update, :destroy, :validate_quote, :cancel_edit]
-  before_action :load_quotes, only: [:index, :destroy]
-  before_action :ensure_quote_is_editable, only: [:edit, :update, :destroy, :cancel_edit]
+  before_action :set_quote, only: [ :show, :edit, :update, :destroy, :validate_quote, :cancel_edit ]
+  before_action :load_quotes, only: [ :index, :destroy ]
+  before_action :ensure_quote_is_editable, only: [ :edit, :update, :destroy, :cancel_edit ]
 
   def index
     @quote = Quote.new

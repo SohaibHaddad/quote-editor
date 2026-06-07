@@ -1,7 +1,7 @@
 class QuoteItemsController < ApplicationController
   before_action :set_quote
   before_action :ensure_quote_is_editable
-  before_action :set_quote_item, only: [:edit, :update, :destroy, :cancel_edit]
+  before_action :set_quote_item, only: [ :edit, :update, :destroy, :cancel_edit ]
 
   def new
     @quote_item = @quote.quote_items.new

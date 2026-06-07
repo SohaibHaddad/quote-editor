@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users, skip: [:registrations]
-  resources :quotes, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+  devise_for :users, skip: [ :registrations ]
+  resources :quotes, only: [ :index, :new, :create, :show, :edit, :update, :destroy ] do
     # These custom cancel routes restore the inline Turbo rows in place.
     # Without them, the cancel buttons would navigate back to /quotes,
     # which reloads the page and resets the user's scroll position.
@@ -8,9 +8,9 @@ Rails.application.routes.draw do
     # their place in the table after cancelling an inline action.
     get :cancel_new, on: :collection
     get :cancel_edit, on: :member
-    
+
     patch :validate_quote, on: :member
-    resources :quote_items, only: [:new, :create, :edit, :update, :destroy] do
+    resources :quote_items, only: [ :new, :create, :edit, :update, :destroy ] do
       # These custom cancel routes restore the inline quote item rows in place.
       # Without them, the cancel buttons would navigate back to the quote show
       # page, which reloads the page and resets the user's scroll position.
