@@ -10,11 +10,19 @@ export default class extends Controller {
   blockIfUnsaved(event) {
     if (!this.hasOpenFormRows()) return
 
+    this.openGuardModal(event)
+  }
+
+  blockIfUnsavedOrOpenDeleteModal(event) {
+    if (this.hasOpenFormRows()) {
+      this.openGuardModal(event)
+      return
+    }
+
     event.preventDefault()
-    event.stopImmediatePropagation?.()
-    this.messageTarget.textContent = this.messageValue
-    this.modalTarget.classList.remove("hidden")
-    document.body.classList.add("overflow-hidden")
+    const deleteModalElement = document.querySelector("[data-controller~='delete-modal']")
+    const deleteModalController = this.application.getControllerForElementAndIdentifier(deleteModalElement, "delete-modal")
+    deleteModalController?.open({ currentTarget: event.currentTarget })
   }
 
   close() {
@@ -30,5 +38,13 @@ export default class extends Controller {
 
   hasOpenFormRows() {
     return this.element.querySelector(this.formRowSelectorValue) !== null
+  }
+
+  openGuardModal(event) {
+    event.preventDefault()
+    event.stopImmediatePropagation?.()
+    this.messageTarget.textContent = this.messageValue
+    this.modalTarget.classList.remove("hidden")
+    document.body.classList.add("overflow-hidden")
   }
 }

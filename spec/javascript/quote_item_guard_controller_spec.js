@@ -1,12 +1,14 @@
 import { afterEach, describe, expect, it } from "vitest"
 import { Application } from "@hotwired/stimulus"
 import QuoteItemGuardController from "../../app/javascript/controllers/quote_item_guard_controller.js"
+import DeleteModalController from "../../app/javascript/controllers/delete_modal_controller.js"
 
 function mount(html) {
   document.body.innerHTML = html
 
   const application = Application.start()
   application.register("quote-item-guard", QuoteItemGuardController)
+  application.register("delete-modal", DeleteModalController)
 
   return application
 }
@@ -90,6 +92,36 @@ describe("QuoteItemGuardController", () => {
 
     expect(document.querySelector('[data-quote-item-guard-target="modal"]').classList.contains("hidden")).toBe(true)
     expect(document.body.classList.contains("overflow-hidden")).toBe(false)
+
+    application.stop()
+  })
+
+  it("opens the delete modal when no form row is present", async () => {
+    const application = mount(`
+      <div data-controller="delete-modal" data-delete-modal-default-message-value="Default delete message">
+        <div data-controller="quote-item-guard" data-quote-item-guard-form-row-selector-value="[data-quote-item-form-row='true']" data-quote-item-guard-message-value="Save first.">
+          <button id="trigger" data-delete-url="/quotes/1" data-delete-message="Delete this quote"></button>
+          <div data-quote-item-guard-target="modal" class="hidden">
+            <p data-quote-item-guard-target="message"></p>
+          </div>
+        </div>
+        <div data-delete-modal-target="modal" class="hidden">
+          <p data-delete-modal-target="message"></p>
+          <form data-delete-modal-target="form"></form>
+        </div>
+      </div>
+    `)
+
+    await Promise.resolve()
+
+    const event = { currentTarget: document.getElementById("trigger"), preventDefault() {} }
+    const controllerElement = document.querySelector('[data-controller="quote-item-guard"]')
+    const controller = application.getControllerForElementAndIdentifier(controllerElement, "quote-item-guard")
+    controller.blockIfUnsavedOrOpenDeleteModal(event)
+
+    expect(document.querySelector('[data-delete-modal-target="modal"]').classList.contains("hidden")).toBe(false)
+    expect(document.querySelector('[data-delete-modal-target="message"]').textContent).toBe("Delete this quote")
+    expect(document.querySelector('[data-delete-modal-target="form"]').action).toBe("http://localhost:3000/quotes/1")
 
     application.stop()
   })
