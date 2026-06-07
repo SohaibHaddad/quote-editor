@@ -26,18 +26,36 @@ class Quote < ApplicationRecord
   end
 
   def total_price_before_tax
-    quote_items.sum(&:price_before_tax)
+    total_price_before_tax_in_cents.to_d / 100
   end
 
   def total_price_after_tax
-    quote_items.sum(&:price_after_tax)
+    total_price_after_tax_in_cents.to_d / 100
   end
 
   def total_tax
-    total_price_after_tax - total_price_before_tax
+    total_tax_in_cents.to_d / 100
+  end
+
+  def total_price_before_tax_in_cents
+    persisted_quote_items.sum(&:price_before_tax_in_cents)
+  end
+
+  def total_price_after_tax_in_cents
+    persisted_quote_items.sum(&:price_after_tax_in_cents)
+  end
+
+  def total_tax_in_cents
+    total_price_after_tax_in_cents - total_price_before_tax_in_cents
   end
 
   def has_quote_items?
     quote_items.exists?
+  end
+
+  private
+
+  def persisted_quote_items
+    quote_items.select(&:persisted?)
   end
 end

@@ -70,6 +70,7 @@ RSpec.describe Quote, type: :model do
     create(:quote_item, quote: quote, unit_price_before_tax_in_cents: 1000, quantity: 2, tax_rate: 20)
     create(:quote_item, quote: quote, unit_price_before_tax_in_cents: 500, quantity: 1, tax_rate: 10)
 
+    expect(quote.total_price_before_tax_in_cents).to eq(2500)
     expect(quote.total_price_before_tax).to eq(25.to_d)
   end
 
@@ -78,6 +79,7 @@ RSpec.describe Quote, type: :model do
     create(:quote_item, quote: quote, unit_price_before_tax_in_cents: 1000, quantity: 2, tax_rate: 20)
     create(:quote_item, quote: quote, unit_price_before_tax_in_cents: 500, quantity: 1, tax_rate: 10)
 
+    expect(quote.total_price_after_tax_in_cents).to eq(2950)
     expect(quote.total_price_after_tax).to eq(29.5.to_d)
   end
 
@@ -86,7 +88,26 @@ RSpec.describe Quote, type: :model do
     create(:quote_item, quote: quote, unit_price_before_tax_in_cents: 1000, quantity: 2, tax_rate: 20)
     create(:quote_item, quote: quote, unit_price_before_tax_in_cents: 500, quantity: 1, tax_rate: 10)
 
+    expect(quote.total_tax_in_cents).to eq(450)
     expect(quote.total_tax).to eq(4.5.to_d)
+  end
+
+  it "sums rounded tax-inclusive line totals in cents" do
+    quote = create(:quote)
+    create(:quote_item, quote: quote, unit_price_before_tax_in_cents: 1234, quantity: 1, tax_rate: 20)
+    create(:quote_item, quote: quote, unit_price_before_tax_in_cents: 1234, quantity: 1, tax_rate: 20)
+
+    expect(quote.total_price_after_tax_in_cents).to eq(2962)
+    expect(quote.total_price_after_tax).to eq(29.62.to_d)
+  end
+
+  it "ignores unsaved in-memory quote items when computing totals" do
+    quote = create(:quote)
+    create(:quote_item, quote: quote, unit_price_before_tax_in_cents: 1000, quantity: 2, tax_rate: 20)
+    quote.quote_items.build
+
+    expect(quote.total_price_before_tax_in_cents).to eq(2000)
+    expect(quote.total_price_after_tax_in_cents).to eq(2400)
   end
 
   it "destroys associated quote items when deleted" do

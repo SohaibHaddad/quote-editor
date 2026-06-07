@@ -170,6 +170,33 @@ Using integer cents keeps the calculations deterministic:
 
 Then the application converts cents back to a decimal amount only for display.
 
+The application also computes quote totals in cents first, instead of summing
+already formatted decimal amounts.
+
+This is important because tax calculations can produce fractional cents.
+
+Example:
+
+```ruby
+12.34 * 1.20
+# => 14.808
+```
+
+That amount cannot exist as real money because a price cannot be charged with
+`0.8` of a cent.
+
+If the application kept those intermediate decimal values and only rounded at
+display time, totals could become inconsistent depending on when rounding is
+applied.
+
+This project therefore uses the following approach:
+- compute line totals in integer cents
+- round tax-inclusive line totals at the line level
+- sum the rounded line totals in cents
+- convert back to decimal amounts only for display
+
+This makes the behavior predictable and closer to invoice-style expectations.
+
 ## Interface Notes
 
 - The quote index is the home page.

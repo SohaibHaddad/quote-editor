@@ -49,11 +49,19 @@ class QuoteItem < ApplicationRecord
     unit_price_before_tax_in_cents.to_d / 100
   end
 
+  def price_before_tax_in_cents
+    unit_price_before_tax_in_cents * quantity
+  end
+
   def price_before_tax
-    unit_price_before_tax * quantity.to_d
+    price_before_tax_in_cents.to_d / 100
+  end
+
+  def price_after_tax_in_cents
+    (price_before_tax_in_cents * (1 + tax_rate.to_d / 100)).round.to_i
   end
 
   def price_after_tax
-    price_before_tax * (1 + tax_rate.to_d / 100)
+    price_after_tax_in_cents.to_d / 100
   end
 end

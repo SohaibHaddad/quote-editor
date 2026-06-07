@@ -75,12 +75,21 @@ RSpec.describe QuoteItem, type: :model do
   it "computes price before tax from unit price and quantity" do
     quote_item = build(:quote_item, unit_price_before_tax_in_cents: 1234, quantity: 3)
 
+    expect(quote_item.price_before_tax_in_cents).to eq(3702)
     expect(quote_item.price_before_tax).to eq(37.02.to_d)
   end
 
   it "computes price after tax from total before tax and tax rate" do
     quote_item = build(:quote_item, unit_price_before_tax_in_cents: 1000, quantity: 2, tax_rate: 20)
 
+    expect(quote_item.price_after_tax_in_cents).to eq(2400)
     expect(quote_item.price_after_tax).to eq(24.to_d)
+  end
+
+  it "rounds tax-inclusive totals at the cents level" do
+    quote_item = build(:quote_item, unit_price_before_tax_in_cents: 1234, quantity: 1, tax_rate: 20)
+
+    expect(quote_item.price_after_tax_in_cents).to eq(1481)
+    expect(quote_item.price_after_tax).to eq(14.81.to_d)
   end
 end
