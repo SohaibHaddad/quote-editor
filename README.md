@@ -2,6 +2,24 @@
 
 This repository contains a Rails 8 quote editor built for the Kactus technical test.
 
+For follow-up product and technical ideas, see [IMPROVEMENTS.md](./IMPROVEMENTS.md).
+
+## Index
+
+- [Tech Stack](#tech-stack)
+- [Requirements](#requirements)
+- [Setup](#setup)
+- [Demo Logins](#demo-logins)
+- [Running the Application](#running-the-application)
+- [Running Tests](#running-tests)
+- [Main Functional Rules](#main-functional-rules)
+- [Money and Precision](#money-and-precision)
+- [Interface Notes](#interface-notes)
+- [Project Structure Notes](#project-structure-notes)
+- [Authentication](#authentication)
+- [Localization](#localization)
+- [Notes](#notes)
+
 The application lets partner users:
 - sign in with seeded accounts
 - list partner quotes
