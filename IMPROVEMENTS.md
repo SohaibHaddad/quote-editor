@@ -10,6 +10,7 @@ This document lists the main areas I would improve next if this project moved be
 - [Auditing](#auditing)
 - [PDF Generation and Sending](#pdf-generation-and-sending)
 - [Quote Listing Scalability](#quote-listing-scalability)
+- [Partner Onboarding](#partner-onboarding)
 - [Testing](#testing)
 - [UI and UX](#ui-and-ux)
 - [Partner Groups](#partner-groups)
@@ -503,6 +504,55 @@ end
 - This would make the home page more useful as both:
   - a recent activity list
   - and a real quote management screen for partners with a large history
+
+## Partner Onboarding
+
+- I would add a complete onboarding flow for partners signing up for the first time, instead of relying on seeded users.
+
+- The current authentication setup is intentionally minimal for the technical test, but a real product would need:
+  - partner account creation
+  - first admin user creation
+  - invitation or creation of additional users
+  - user management inside the partner space
+
+- A possible onboarding flow could be:
+  - a partner fills a signup form
+  - the system creates the partner record
+  - the first user becomes the admin of that partner
+  - the admin configures initial settings such as:
+    - default currency
+    - allowed tax rates
+    - branding details
+  - the admin invites teammates by email
+
+- A possible data evolution could include:
+
+```rb
+# users
+# - id: integer
+# - partner_id: integer
+# - username: string
+# - email: string
+# - role: string
+#
+# Example roles:
+# - admin
+# - manager
+# - contributor
+```
+
+- With that structure, the product could support:
+  - partner admins who manage users and settings
+  - standard users who only create and edit quotes
+  - later, more specific roles if the ACL system becomes more advanced
+
+- A user-management area could then allow an admin to:
+  - add a new user
+  - invite a new user
+  - deactivate a user
+  - change a user role
+
+- This would make the application much closer to a real B2B partner platform and remove the need for developer-managed seed-based onboarding.
 
 ## Testing
 
