@@ -17,6 +17,17 @@ fr:
     fr: "Français"
   delete_modal:
     default_message: "Cette action est irréversible."
+  devise:
+    sessions:
+      new:
+        hero_title: "Connectez-vous avec votre compte seedé."
+        hero_body: "L'accès est limité aux utilisateurs existants. Les nouveaux comptes sont créés via les seeds, pas depuis l'interface."
+        login_label: "Connexion"
+        login_body: "Utilisez votre nom d'utilisateur et votre mot de passe. Si vous avez besoin d'un autre compte, ajoutez-le dans `db/seeds.rb`."
+        welcome_back: "Bon retour"
+        sign_in: "Se connecter"
+        instructions: "Saisissez les identifiants d'un compte utilisateur créé via les seeds."
+        remember_me: "Se souvenir de moi"
   quotes:
     unsaved_changes:
       message: "Enregistrez ou annulez les modifications en cours sur le devis avant de lancer une autre action."

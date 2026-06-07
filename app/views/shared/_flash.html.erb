@@ -1,5 +1,5 @@
 <% if notice.present? || alert.present? %>
-  <div class="fixed inset-x-0 top-4 z-50 mx-auto flex max-w-xl flex-col gap-2 px-4">
+  <div data-controller="flash" class="fixed inset-x-0 top-4 z-50 mx-auto flex max-w-xl flex-col gap-2 px-4">
     <% if notice.present? %>
       <p class="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 shadow-sm"><%= notice %></p>
     <% end %>
