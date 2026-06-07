@@ -27,6 +27,8 @@ fr:
         welcome_back: "Bon retour"
         sign_in: "Se connecter"
         instructions: "Saisissez les identifiants d'un compte utilisateur créé via les seeds."
+        username: "Nom d'utilisateur"
+        password: "Mot de passe"
         remember_me: "Se souvenir de moi"
   quotes:
     unsaved_changes:

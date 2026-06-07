@@ -4,6 +4,10 @@ This repository contains a Rails 8 quote editor built for the Kactus technical t
 
 For follow-up product and technical ideas, see [IMPROVEMENTS.md](./IMPROVEMENTS.md).
 
+The application is deployed on Heroku here: https://quote-editor-4a953b05d8b7.herokuapp.com/.
+To connect, see the [Demo Logins](#demo-logins) section.
+If you want to run the project locally, see the [Setup](#setup) section.
+
 ## Index
 
 - [Tech Stack](#tech-stack)
@@ -90,7 +94,7 @@ Seeded partner:
 
 - `Kactus resort and hotels`
 
-Seeded users:
+Seeded users usernames:
 
 - `Sohaib Haddad`
 - `Kevin Dreno`

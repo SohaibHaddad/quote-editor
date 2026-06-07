@@ -27,6 +27,8 @@ en:
         welcome_back: "Welcome Back"
         sign_in: "Sign in"
         instructions: "Enter the credentials for a seeded user account."
+        username: "Username"
+        password: "Password"
         remember_me: "Remember me"
   quotes:
     unsaved_changes:
