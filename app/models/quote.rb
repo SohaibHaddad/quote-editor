@@ -20,6 +20,11 @@ class Quote < ApplicationRecord
     state :in_draft, value: 0
     state :validated, value: 1
 
+    # A quote can only transition from `in_draft` to `validated`.
+    # Once validated, it is considered frozen from the user's point of view:
+    # the UI and controllers block quote edits, quote deletion, and quote item
+    # changes. This behavior is not enforced here at the model layer or at the
+    # database level as a general immutability rule.
     event :validate_quote do
       transition in_draft: :validated, if: :has_quote_items?
     end
